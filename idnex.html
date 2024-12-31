@@ -1,0 +1,106 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webmasters small projects</title>
+</head>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://www.mapbox.com/base/latest/base.css">
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v1.3.1/mapbox-gl-geocoder.css">
+<link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.23.0/mapbox-gl.css">
+<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.26.0/mapbox-gl.js"></script>
+<script src="https://labs.mapbox.com/bites/00273/geocoder.js"></script>
+<body>
+    <head>
+        <meta charset='utf-8' />
+        <title>Population density inspector</title>
+     </head>
+     <body>
+        <div class='mobile z100 dark pin-bottom center fill-dark pad1y'>
+           Best experience on desktop
+        </div>
+        <div id='map' class='inspector'>
+           <div id='tooltip' class='dark'>
+              <div class='dot'></div>
+              <div class='line'></div>
+              <div class='bubble'>
+                 <span class="rcon account strong" id='blockcount'></span>
+                 <span class="quiet small">
+                 (<span id='blockdensity'></span>/km<sup>2</sup>)
+                 </span>
+                 <div id="address" class="small quiet"></div>
+              </div>
+           </div>
+        </div>
+        <div class='pin-topleft z100 dark fill-dark desktop' id='sidebar'>
+           <div class='pad1 geocoder z100 pin-top'></div>
+           <div id='minimap' class='section'>
+           </div>
+           <div class='pad1 section clearfix'>
+              <span class='small uppercase label strong'>Visualization</span>
+              <div class='rounded-toggle fr col4'>
+                 <input id='pizza' type='radio' name='rtoggle' value='pizza' checked='checked'>
+                 <label for='pizza' class='col6 center' onclick='tilt(false)'>2D</label>
+                 <input id='penny' type='radio' name='rtoggle' value='penny'>
+                 <label for='penny' class='col6 center' onclick='tilt(true)'>3D</label>
+              </div>
+           </div>
+           <div class='pad1 section clearfix '>
+              <span class='small uppercase label quiet'>roads</span>
+              <div class='rounded-toggle fr col4'>
+                 <input id='roadson' type='radio' name='roads' value='roadson' checked='checked'>
+                 <label for='roadson' class='col6 center' onclick='toggleRoads(true)'>ON</label>
+                 <input id='roadsoff' type='radio' name='roads' value='roadsoff'>
+                 <label for='roadsoff' class='col6 center' onclick='toggleRoads(false)'>OFF</label>
+              </div>
+           </div>
+           <div class='pad1 section clearfix'>
+              <span class='small uppercase label quiet'>Labels</span>
+              <div class='rounded-toggle fr col4'>
+                 <input id='labelon' type='radio' name='labels' value='labelon' checked='checked'>
+                 <label for='labelon' class='col6 center' onclick='toggleLabels(true)'>ON</label>
+                 <input id='labeloff' type='radio' name='labels' value='labeloff'>
+                 <label for='labeloff' class='col6 center' onclick='toggleLabels(false)'>OFF</label>
+              </div>
+           </div>
+           <div class='pad1 section clearfix hidden'>
+              <span class='small uppercase label quiet short'>Inspector</span>
+              <div class='rounded-toggle fr col8'>
+                 <input id='none' type='radio' name='inspector' value='none'>
+                 <label for='none' class='col4 center' onclick='setInspector("none")'>None</label>
+                 <input id='radius' type='radio' name='inspector' value='radius'>
+                 <label for='radius' class='col4 center' onclick='setInspector("radius")'>Radius</label>
+                 <input id='block' type='radio' name='inspector' value='block' checked='checked'>
+                 <label for='block' class='col4 center' onclick='setInspector("block")'>Block</label>
+              </div>
+           </div>
+           <div class='section clearfix checkbox-pill pill hidden'>
+              <input type='checkbox' id='checkbox-penny' checked='checked'>
+              <label for='checkbox-penny' class='button icon check col6 small uppercase label quiet'>Labels</label>
+              <input type='checkbox' id='checkbox-pizza' checked='checked'>
+              <label for='checkbox-pizza' class='button icon check col6 small uppercase label quiet'>Roads</label>
+           </div>
+           <fieldset class='pad1 section'>
+              <span class='fl small uppercase label quiet' style='line-height:18px'>adjust <br>scale</span>
+              <div class='col8 fr'>
+                 <input type='range' value='2500000' min='50000' max='3500000' step='50000' id='slider' class='col12'>
+                 <span class='fl small quiet uppercase'>Minimize</span>
+                 <span class='fr small quiet uppercase'>Embellish</span>
+              </div>
+           </fieldset>
+        </div>
+        <div class='pin-bottomright desktop' id='legends'>
+           <div class='pin-bottomright dark pad1' id='colorscale' style='margin:10px'>
+              <div id='legend'></div>
+              <span class='fl small quiet uppercase'>0</span>
+              <span class='fr small quiet uppercase' id='max'></span>
+              <span class='center block small quiet uppercase icon account'>/km<sup>2</sup></span>
+           </div>
+           <div id='scale' class='pin-bottomright dark'>
+              <div class='rcon small account z100 quiet center pin-bottom pad1y code' id='people'>4000</div>
+           </div>
+        </div>
+     </body>
+<script src="script.js"></script>    
+</body>
+</html>
